@@ -1,0 +1,10 @@
+.gradle/
+build/
+data/
+*.mv.db
+*.trace.db
+*.lock.db
+.env
+.idea/
+*.iml
+local.properties
