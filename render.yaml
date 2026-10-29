@@ -1,0 +1,37 @@
+databases:
+  - name: reportes-postgres-monja
+    databaseName: reportes
+    user: reportes_user
+    plan: free
+    region: ohio
+
+services:
+  - type: web
+    name: reporteservice-monja
+    runtime: docker
+    plan: free
+    region: ohio
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /reportes/
+    envVars:
+      - key: REPORTES_DB_HOST
+        fromDatabase:
+          name: reportes-postgres-monja
+          property: host
+      - key: REPORTES_DB_PORT
+        fromDatabase:
+          name: reportes-postgres-monja
+          property: port
+      - key: REPORTES_DB_NAME
+        fromDatabase:
+          name: reportes-postgres-monja
+          property: database
+      - key: REPORTES_DB_USER
+        fromDatabase:
+          name: reportes-postgres-monja
+          property: user
+      - key: REPORTES_DB_PASSWORD
+        fromDatabase:
+          name: reportes-postgres-monja
+          property: password
